@@ -1,0 +1,132 @@
+<head>
+<style>
+    textarea { overflow: visible; }
+</style>
+</head>
+<body>
+<p>
+<h2>FAQs</h2>
+<p>
+[% FOREACH t IN tables %]
+    <a href="[% script %]/[% t %]">[% t %]</a>
+    [% IF ! loop.last() %]|[% END %]
+[% END %]
+</p>
+[% IF user == 'admin' %]
+<form 
+    method="POST"
+    onsubmit="
+        var t = this.table.value;
+        if ( t == '' )
+        {
+            alert( 'no FAQ' );
+            return false;
+        }
+        return true;
+    "
+>
+    <input type="hidden" name="user" value="[% user %]">
+    <b>type a new FAQ here</b>: <textarea name="table" cols="30"></textarea>
+    <input type="submit" name="action" value="New FAQ">
+</form>
+[% END %]
+[% IF table %]
+<h2>[% table %] FAQ</h2>
+<ol>
+[% FOREACH question IN questions %]
+<li>Q: <a href="#[% question.qid %]">[% question.question %]</a></li>
+[% END %]
+</ol>
+[% IF user == 'admin' %]
+<form action="[% script %]" method="POST">
+    <input type="hidden" name="user" value="[% user %]">
+    <input name="table" type="hidden" value="[% table %]">
+    <input name="action" type="submit" value="Delete FAQ">
+</form>
+[% END %]
+<form 
+    method="POST"
+    onsubmit="
+        var nq = this.new_question.value;
+        if ( nq == '' )
+        {
+            alert( 'no question' );
+            return false;
+        }
+        return true;
+    "
+>
+    <input type="hidden" name="user" value="[% user %]">
+    <b>If you have a question that isn't answered in this FAQ, type it here:</b>
+    <textarea name="new_question" cols="30"></textarea>
+    <input type="submit" value="Add Question">
+</form>
+[% END %]
+<dl>
+<table width="100%">
+[% FOREACH question IN questions %]
+    <form method="POST">
+    <input type="hidden" name="user" value="[% user %]">
+    <input type="hidden" name="qid" value="[% question.qid %]">
+    <tr><td colspan="3"><a name="[% question.qid %]"><hr /></a></td></tr>
+    <tr>
+        <td valign="top">
+        <b>Q:</b></td>
+        <td valign="top"align="left">
+            <span id="q[% question.qid %]" style="font-weight: bold">[% question.question %]</span>
+            [% IF user == 'admin' %]
+            <textarea cols="80" id="qta[% question.qid %]" style="display: none" name="question">[% question.question %]</textarea>
+            [% END %]
+        </td>
+        [% IF user == 'admin' %]
+        <td valign="top"align="right">
+            <input type="submit" name="action" value="Delete Question">
+            <input 
+                onclick="
+                    document.all.q[% question.qid %].style.display = 'none';
+                    document.all.qta[% question.qid %].style.display = 'inline';
+                    document.all.qu[% question.qid %].style.display = 'inline';
+                    this.style.display = 'none';
+                "
+                type="button" 
+                name="action" 
+                value="Edit Question"
+            >
+            <input type="submit" id="qu[% question.qid %]" style="display: none" name="action" value="Update Question">
+        </td>
+        [% END %]
+    </tr>
+    <tr>
+        <td valign="top"><b>A:</b></td>
+        <td valign="top" align="left">
+            <span id="a[% question.qid %]">[% question.answer %]</span>
+            [% IF user == 'admin' %]
+            <textarea cols="80" id="ata[% question.qid %]" style="display: none" name="answer">[% question.answer %]</textarea>
+            [% END %]
+        </td>
+        [% IF user == 'admin' %]
+        <td valign="top" align="right">
+            <input 
+                onclick="
+                    document.all.a[% question.qid %].style.display = 'none';
+                    document.all.ata[% question.qid %].style.display = 'inline';
+                    document.all.au[% question.qid %].style.display = 'inline';
+                    this.style.display = 'none';
+                "
+                type="button" 
+                name="action" 
+                value="Edit Answer"
+            >
+            <input type="submit" id="au[% question.qid %]" style="display: none" name="action" value="Update Answer">
+        </td>
+        [% END %]
+    </tr>
+    </form>
+[% END %]
+</table>
+[% IF user == 'admin' %]
+<form action="/faq/[% table %]"><input type="submit" value="Logout"></form>
+[% ELSE %]
+<form action="/faqadmin/[% table %]"><input type="submit" value="Login"></form>
+[% END %]
+</body>

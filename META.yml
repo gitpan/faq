@@ -1,0 +1,16 @@
+# http://module-build.sourceforge.net/META-spec.html
+#XXXXXXX This is a prototype!!!  It will change in the future!!! XXXXX#
+name:         faq
+version:      0.001
+version_from: FAQ.pm
+installdirs:  site
+requires:
+    CGI::Lite:                     0
+    Class::DBI:                    0
+    DBD::mysql:                    0
+    DBI:                           0
+    FAQ:                           0
+    Template:                      0
+
+distribution_type: module
+generated_by: ExtUtils::MakeMaker version 6.17
