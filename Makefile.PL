@@ -3,7 +3,7 @@ use ExtUtils::MakeMaker;
 # the contents of the Makefile that is written.
 WriteMakefile(
     'NAME'		=> 'faq',
-    'VERSION_FROM'	=> 'FAQ.pm', # finds $VERSION
+    'VERSION_FROM'	=> 'faq.pl', # finds $VERSION
     'PREREQ_PM'		=> {
     Class::DBI => 0,
     Template => 0,

@@ -1,8 +1,8 @@
 # http://module-build.sourceforge.net/META-spec.html
 #XXXXXXX This is a prototype!!!  It will change in the future!!! XXXXX#
 name:         faq
-version:      0.001
-version_from: FAQ.pm
+version:      0.002
+version_from: faq.pl
 installdirs:  site
 requires:
     CGI::Lite:                     0

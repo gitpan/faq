@@ -1,5 +1,7 @@
 #!/usr/local/bin/perl
 
+$VERSION = '0.002';
+
 use strict;
 use warnings;
 
@@ -140,14 +142,14 @@ This is a simple CGI script for managing a web based FAQ. It uses mysql to
 store the questions and answers in the FAQ. It is pretty staightforward -
 basically, anyone can submit a new question through the "Add Question" form.
 There is also an admin user, that you should set up using HTTP authentication
-(see L<SYNOPIS>). 
+(see L<"SYNOPIS">). 
 
 You login as admin user by clicking on the "Login" button,
 and entering the authentication details that you have set up. The admin
 interface allows FAQ administrators to add or delete FAQs, answer questions,
 edit answers, or delete questions. If you want to set up different
 administrators on a per FAQ basis, you can do this because of the URL structure
-of the interface (see example in L<SYNOPSIS>).
+of the interface (see example in L<"SYNOPSIS">).
 
 Included in the distribution is a utility script, L<unanswered_questions.pl>, which you can use - for example using cron - to alert you of any unanswered questions in a particular FAQ.
 
@@ -170,7 +172,7 @@ Ave Wrigley <Ave.Wrigley@itn.co.uk>
 
 =head1 COPYRIGHT
 
-Copyright (c) 2001 Ave Wrigley. All rights reserved. This program is free
+Copyright (c) 2004 Ave Wrigley. All rights reserved. This program is free
 software; you can redistribute it and/or modify it under the same terms as Perl
 itself.
 
